@@ -1,0 +1,28 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "deploy/prod/webapp/**"
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build Image
+        uses: ./.github/actions/build-image
+
+  deploy:
+    if: github.ref == 'refs/tags/deploy/prod/webapp/*'
+    runs-on: ubuntu-latest
+    environment: production
+    needs: build-image
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Deploy
+        uses: ./.github/actions/deploy

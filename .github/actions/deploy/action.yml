@@ -1,0 +1,9 @@
+name: "Deploy"
+description: "Deploys the Docker image"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Deploy
+      shell: bash
+      run: echo "Deploying"

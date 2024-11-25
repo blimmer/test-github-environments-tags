@@ -1,0 +1,12 @@
+name: "Build Image"
+description: "Builds the Docker image"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Check if Docker Image Is Built
+      shell: bash
+      run: echo "Checking if Docker Image Is Built..." # If docker image is already built, we don't need to build it again (e.g., in the case of a rollback)
+    - name: Build and Push Image
+      shell: bash
+      run: echo "Building and pushing image"
